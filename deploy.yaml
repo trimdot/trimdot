@@ -4,5 +4,7 @@
   tasks:
     - name: deploy ssh keys remotely
       include: plays/deploy_ssh.yaml
-    - name: cpoy host file
+    - name: copy host file
       include: plays/copy_hosts.yaml
+    - name: base vars
+      include: plays/vars.yaml
