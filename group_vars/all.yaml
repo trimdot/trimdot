@@ -1,2 +1,5 @@
 ---
 greeting: Aloha!
+shell: /bin/bash
+state: present
+#ansible_managed: !!!GTFO!!! THIS IS ANSIBLE MANAGED !!!GTFO!!!

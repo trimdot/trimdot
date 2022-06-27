@@ -1,6 +1,9 @@
 ---
-- name: general deployment
+- name: lets gooooooooo
   hosts: all
+  vars_files:
+    - group_vars/user_list.yaml
+    - vault/secrets.yaml
   tasks:
     - name: deploy ssh keys remotely
       include: plays/deploy_ssh.yaml
@@ -8,3 +11,7 @@
       include: plays/copy_hosts.yaml
     - name: base vars
       include: plays/vars.yaml
+    - name: add users
+      include: plays/useradd.yaml
+    - name: template example
+      include: plays/template.yaml
