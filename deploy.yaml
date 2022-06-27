@@ -1,0 +1,5 @@
+---
+- name: general deployment
+  hosts: all
+  tasks:
+    - name: plays/playbook.yaml
