@@ -1,0 +1,11 @@
+---
+- copy:
+    src: /etc/hosts
+    dest: /tmp/hosts.BACKUP
+    owner: ubuntu
+    group: ubuntu
+
+- copy:
+    content: |
+      This is a backup of hosts /tmp/hosts.BACKUP
+    dest: /tmp/hosts.BACKUP.log
