@@ -2,4 +2,5 @@
 - name: general deployment
   hosts: all
   tasks:
-    - name: plays/playbook.yaml
+    - name: deploy ssh keys remotely
+      include: plays/deploy_ssh.yaml
