@@ -1,0 +1,9 @@
+{{ ansible_managed }}
+
+This host is: {{ ansible_hostname }}
+My IP address is: {{ ansible_all_ipv4_addresses }}
+My OS is: {{ ansible_os_family }}
+Total Memory: {{ ansible_memtotal_mb }}
+{% if ansible_memtotal_mb > 200 %}
+Memory is LARGE
+{% endif %}

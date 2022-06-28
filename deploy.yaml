@@ -17,3 +17,5 @@
 #      include: plays/template.yaml
 #    - name: linein example
 #      include: plays/lineinfile_example.yaml
+    - name: conditional example
+      include_tasks: plays/conditional.yaml

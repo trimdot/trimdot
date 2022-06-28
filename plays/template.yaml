@@ -1,0 +1,8 @@
+---
+- name: template test 
+  template:
+    src: templates/example.j2
+    dest: /tmp/server_info.txt
+    owner: ubuntu
+    group: ubuntu
+    mode: '0644'

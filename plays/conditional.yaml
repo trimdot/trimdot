@@ -1,0 +1,14 @@
+---
+- name: create ubuntu file if condition matches
+  file:
+    path: /tmp/I_am_not_ubuntu
+    state: touch
+    mode: 0644
+  when: ansible_os_family != "Debian"
+
+- name: create file when host group matched
+  file:
+    path: /tmp/I_AM_ROCKYYYYYYYYYYY
+    state: touch
+    mode: 0644
+  when: "'rocky' in group_names"
