@@ -1,14 +1,37 @@
 ---
-- name: create ubuntu file if condition matches
-  file:
-    path: /tmp/I_am_not_ubuntu
+- name: create hardware report
+  ansible.builtin.file:
+    path: /tmp/report.txt
     state: touch
-    mode: 0644
-  when: ansible_os_family != "Debian"
 
-- name: create file when host group matched
-  file:
-    path: /tmp/I_AM_ROCKYYYYYYYYYYY
+- name: create ubuntu file if condition matches
+  command: curl -s http://169.254.169.254/latest/meta-data/instance-type
+  register: instance_type
+
+- name: populate file when t2.nano
+  ansible.builtin.lineinfile:
+    path: /tmp/report.txt
+    line: 'teenytiny' 
+  when: instance_type.stdout == "t2.nano"
+
+- name: populate file when t2.micro
+  ansible.builtin.lineinfile:
+    path: /tmp/report.txt
+    line: 'big'
+  when: instance_type.stdout == "t2.micro"
+
+- name: register var for nano
+  ansible.builtin.command: cat /tmp/report.txt
+  register: reportoutput
+
+- name: Am I big?
+  ansible.builtin.file:
+    path: /tmp/I_AM_BIG
     state: touch
-    mode: 0644
-  when: "'rocky' in group_names"
+  when: reportoutput.stdout == "big"
+
+- name: Am I small?
+  ansible.builtin.file:
+    path: /tmp/I_AM_BIG
+    state: touch
+  when: reportoutput.stdout == "teenytiny"
