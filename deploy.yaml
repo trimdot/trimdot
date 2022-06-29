@@ -9,10 +9,18 @@
   hosts: all
   become: true
   tasks:
-    - name: ssh assert
-      include_tasks: plays/assert.yaml
-#     - name: execute shell cmds
-#       include: plays/shell.yaml
+
+#    - name: windows setup
+#      include_tasks: plays/win_ssh.yaml
+#      when: "'win' in group_names"
+#    - name: manage httpd.conf
+#      include_tasks: plays/win_file.yaml
+#      when: "'win' in group_names"
+#    - name: ssh assert
+#      include_tasks: plays/assert.yaml
+#    - name: execute shell cmds
+#      include: plays/shell.yaml
+#      when: "'linux' in group_names"
 #    - name: copy sepermit
 #      include: plays/command.yaml
 #    - name: install apache

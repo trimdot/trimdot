@@ -1,0 +1,8 @@
+---
+- name: edit httpd config
+  win_lineinfile:
+    path: c:\Temp\httpd.conf
+    regex: '^Listen '
+    insertafter: '^#Listen '
+    line: Listen 8080
+
