@@ -1,0 +1,13 @@
+---
+- set_fact:
+    one: hihi
+    two: "{{ ansible_local.local.local_facts.instance_type }}"
+    boot: "{% if ansible_cmdline.BOOT_IMAGE  == '/boot/vmlinuz-5.13.0-1022-aws'%}vmlinuz-5.13.0\
+           {% else %}vmlinuz-4.18.0\
+           {% endif %}"
+
+- name: combine
+  debug:
+    msg: "I'd like to say {{ one }}, I'm a {{ two }} instance in AWS and my kernel is {{ boot }}"
+
+

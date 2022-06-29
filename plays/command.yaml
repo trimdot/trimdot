@@ -1,0 +1,10 @@
+---
+#- name: copy sepermit
+#  ansible.builtin.copy:
+#    src: /etc/security/sepermit.conf
+#    dest: /tmp/sepermit.conf
+
+- name: copy a file
+  command: cp /etc/security/sepermit.conf /tmp/sepermit.conf
+  args:
+    creates: /tmp/sepermit.conf

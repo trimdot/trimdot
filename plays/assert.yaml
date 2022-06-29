@@ -1,0 +1,33 @@
+---
+- name: block for apache check
+  block:
+
+  - name: "Check if NGINX is installed"
+    package_facts:
+      manager: "auto"
+
+  - name: confirm nginx is installed
+    assert:
+      that: "'httpd' in ansible_facts.packages"
+    ignore_errors: yes
+
+  - name: collect index.html contents
+    shell: cat /var/www/html/index.html
+    register: index_html_contents
+
+  - name: confirm string in index.html
+    assert:
+      that: "'bbc.co.uk' in index_html_contents.stdout"
+    ignore_errors: yes
+
+  - name: Check if port 80 is listening
+    shell: /usr/sbin/ss -at '( dport = :80 or sport = :80 )'| grep LISTEN
+    register: port_check
+    ignore_errors: yes
+
+  - name: confirm port 80 is listening
+    assert:
+      that: "'*:http' in port_check.stdout"
+    ignore_errors: yes
+
+#  when: "'apache' in group_names"

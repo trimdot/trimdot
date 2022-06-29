@@ -1,0 +1,13 @@
+---
+- name: list dirs
+  shell: "ls -lrt /etc | awk '{print $9}' | sed '/^$/d' > /tmp/dirlist.txt"
+
+- name: create hello if doesnt exist
+  ansible.builtin.file:
+    path: /tmp/hello.txt
+    state: file
+
+- name: multiple commands
+  shell: |
+    systemctl status sshd > /tmp/hello.txt
+    cat /proc/meminfo | grep -i memtotal >> /tmp/hello.txt
