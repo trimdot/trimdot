@@ -8,16 +8,18 @@
 - name: lets gooooooooo
   hosts: all
   become: true
+#  roles:
+#  - role: geerlingguy.mysql
+#    when: ansible_local.local.local_facts.support_team == 'DB'
   tasks:
-
 #    - name: windows setup
 #      include_tasks: plays/win_ssh.yaml
 #      when: "'win' in group_names"
 #    - name: manage httpd.conf
 #      include_tasks: plays/win_file.yaml
 #      when: "'win' in group_names"
-#    - name: ssh assert
-#      include_tasks: plays/assert.yaml
+    - name: check DB status
+      include_tasks: plays/assert.yaml
 #    - name: execute shell cmds
 #      include: plays/shell.yaml
 #      when: "'linux' in group_names"
@@ -46,4 +48,8 @@
     - name: restart apache
       service:
         name: httpd
+        state: restarted
+    - name: restart mysql
+      service:
+        name: mysql
         state: restarted

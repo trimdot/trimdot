@@ -30,4 +30,24 @@
       that: "'*:http' in port_check.stdout"
     ignore_errors: yes
 
-#  when: "'apache' in group_names"
+  when: "'apache' in group_names"
+
+- name: block for mysql check
+  block:
+
+  - name: Check if port 3306 is listening
+    shell: ss -at | grep  ':mysql' | grep LISTEN
+    register: port_check
+    ignore_errors: yes
+
+  - name: confirm port 3306 is listening
+    assert:
+      that: "':mysql' in port_check.stdout"
+    ignore_errors: yes
+
+  - name: check mysql service is up
+    service: 
+      name: mysql
+      state: started
+
+  when: "'db' in group_names"
